@@ -2,28 +2,13 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-// var p = $('#currentDay');
-// var now = dayjs();
-// var formattedDateTime = now.format('MM-DD-YYYY');
-// p.innerText = formattedDateTime;
-
-// var h4 = $('#hour-4');
-// var past = $('row time-block past');
-
-// var hour = dayjs().hour();
-// console.log(hour);
-
-//console.log(formattedDateTime);
+//all global variables 
 var button = $('.btn');
 var div = $('.div-container');
 var nine = $('#9');
 var description = $('.description');
 var textInput = description.val();
 var timeBlock = $('.time-block');
-// var text = timeBlock.find('.description').val();
-// var timeBlockId = timeBlock.attr('id');
-// var timeBlock = $(this);
-//console.log(textInput);
 
 $(function () {
   var hour = dayjs().hour();  //sets a variable eaqual to the time in military time
@@ -42,65 +27,26 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
-  // function getUserInput(){
-  //   // var input = {}; //this is my reset for the input sections 
-  //   var text = description.val();
-  //   localStorage.setItem('userInput', text);
-  
+  function getUserInput() { //this function gathers the users input in the selected time block 
+    timeBlock.each(function() { //this tells the code to iterate or loop over each time block
+      var blockHour = parseInt($(this).attr('id')); //this takes the id of the time block turn it into an integer and assigns it to the blockHour variable giving each time block a unique key
+      var text = localStorage.getItem('userInput_' + blockHour); //this then gathers the value from the local storage that was set to the updated unique key and stores it to the valuable of text
 
-  //   console.log(text);
-  // };
-
-  // function getUserInput() {
-  //   timeBlock.each(function() {
-  //     var timeBlock = $(this);
-  //     // var text = timeBlock.find('.description').val();
-  //     var timeBlockId = timeBlock.attr('id');
-  //     localStorage.getItem('userInput_' + timeBlockId);
-  //     console.log(text);
-
-  //     if (text) {
-  //       timeBlock.find('.description').val(text);
-  //     }
-
-  //   });
-  // }
-
-  function getUserInput() {
-    timeBlock.each(function() {
-      var blockHour = parseInt($(this).attr('id'));
-      var text = localStorage.getItem('userInput_' + blockHour);
-
-      if (text) {
-        $(this).find('.description').val(text);
-      }
+      if (text) { //this checks to see if the text block has any value or is null
+        $(this).find('.description').val(text);  //this uses the this element to select the description of the current time block that the loop is on 
+      }//the val.text then sets the value of that desciption to the text that was retrieved from the local storage and saved to the text variable 
     });
   }
 
-  function saveUserInput() {
-    var blockHour = parseInt($(this).closest('.time-block').attr('id'));
-    var text = $(this).siblings('.description').val();
+  function saveUserInput() { // this refers to the save button element that triggered the click event, closest selects the nearest ancestor element with the class time-block. In this case, it selects the parent element of the save button
+    var blockHour = parseInt($(this).closest('.time-block').attr('id')); // .attr retrieves the value of the id attribute of the selected time block element, parseInt() converts the id value from a string to an integer and then stores it to the blockHour variable 
+    var text = $(this).siblings('.description').val(); //.this selects the sibling elemets with the class of description and then stores that textarea value to the varible text
 
-    localStorage.setItem('userInput_' + blockHour, text);
-  }
-  
-  
-
-  // function showUserInput() {
-  //   var check = getUserInput();
-
-  //   console.log(check);
-
-  // }
-
-  // function userData(){
+    localStorage.setItem('userInput_' + blockHour, text); //localStorage.setItem(key, value) stores the specified value in the localStorage object with the specified key
+   // The key is composed by appending the blockHour value to userInput_, which creates a unique key for each time block
+   // The users input text value is saved in localStorage with the created key
     
-
-  //   // var calender = description.value;
-  //   console.log(text);
-
-  //   localStorage.setItem('userInput', (text));
-  // }
+  }
 
   //
   // TODO: Add code to apply the past, present, or future class to each time
@@ -129,11 +75,7 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 
-  button.on('click', saveUserInput);
+  button.on('click', saveUserInput); //event listener to call save user input on button click 
 
-  getUserInput();
+  getUserInput(); //calls get user input function
 });
-
-// button.addEventListener('click', userData);
-
-// showUserInput();
