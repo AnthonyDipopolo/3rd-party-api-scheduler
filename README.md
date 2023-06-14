@@ -10,6 +10,6 @@ This app is designed to allow the user to scheduel out the current days plans.  
 
 https://anthonydipopolo.github.io/3rd-party-api-scheduler/
 
-![SS](./Assets/screenshots/Screen%20Shot%202023-06-14%20at%205.47.00%20PM.png "Schedueler ScreenShot")
+![SS](./Assets/screenshots/Screen%20Shot%202023-06-14%20at%206.04.29%20PM.png "Schedueler ScreenShot")
 
 ![SS](./Assets/screenshots/Screen%20Shot%202023-06-14%20at%205.47.07%20PM.png "Schedueler ScreenShot")
